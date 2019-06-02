@@ -15,7 +15,17 @@ repositories {
 }
 
 dependencies {
+	// Spring web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
+	// JUnit4 포함되어있음
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Hibernate
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	compile("mysql:mysql-connector-java")
+
+	// devtool - 코드 변경시 자동 reload
+	compile 'org.springframework.boot:spring-boot-devtools'
 }
