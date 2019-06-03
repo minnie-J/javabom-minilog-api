@@ -29,11 +29,11 @@ public class Article {
     private String relplace;
     private String relperson;
     private String tags;
-    private String author;
+    private int author;
 
     public Article() {}
 
-    public Article(int ano, String title, String content, String symbol, Date regdate, String category, String subclass, double stars, String reldate, String relplace, String relperson, String tags, String author) {
+    public Article(int ano, String title, String content, String symbol, Date regdate, String category, String subclass, double stars, String reldate, String relplace, String relperson, String tags, int author) {
         this.ano = ano;
         this.title = title;
         this.content = content;
@@ -145,11 +145,11 @@ public class Article {
         this.tags = tags;
     }
 
-    public String getAuthor() {
+    public int getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(int author) {
         this.author = author;
     }
 }
