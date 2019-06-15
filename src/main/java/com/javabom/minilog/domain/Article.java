@@ -31,6 +31,10 @@ public class Article {
     private String tags;
     private int author;
 
+    @ManyToOne
+    @JoinColumn(name = "mno")
+    private Member member;
+
     public Article() {}
 
     public Article(int articleId, String title, String content, String symbol, Date regdate, String category, String subclass, double stars, String reldate, String relplace, String relperson, String tags, int author) {
