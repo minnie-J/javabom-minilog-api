@@ -31,9 +31,9 @@ public class Article {
     private String tags;
     private int author;
 
-    @ManyToOne
-    @JoinColumn(name = "mno")
-    private Member member;
+//    @ManyToOne
+//    @JoinColumn(name = "mno")
+//    private Member member;
 
     public Article() {}
 
@@ -57,9 +57,9 @@ public class Article {
         return articleId;
     }
 
-    public void setAno(int articleId) {
-        this.articleId = articleId;
-    }
+//    public void setAno(int articleId) {
+//        this.articleId = articleId;
+//    }
 
     public String getTitle() {
         return title;
