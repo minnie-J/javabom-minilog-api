@@ -17,9 +17,9 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int mno;
 
-    @OneToMany(mappedBy = "members")
-    @JoinColumn(name = "author")
-    private List<Article> articles = new ArrayList<Article>();
+//    @OneToMany(mappedBy = "members")
+//    @JoinColumn(name = "author")
+//    private List<Article> articles = new ArrayList<Article>();
 
     public Member() {}
 
