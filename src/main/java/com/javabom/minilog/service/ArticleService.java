@@ -5,8 +5,20 @@ import com.javabom.minilog.domain.Article;
 import java.util.List;
 
 public interface ArticleService {
-    Article findByAuthor(String author);
-    Article findByAuthorAndCategory(String author, String category);
-    Article save(Article article);
-    Article delete(int ano);
+//    public Article findByAuthor(String author);
+//    public Article findByAuthorAndCategory(String author, String category);
+
+    // Read
+    List<Article> findAll();
+    List<Article> findAllByCategory(String category);
+    Article findById(int articleId);
+
+    // Create
+    Article create(Article article);
+
+    // Update
+    void update(Article article);
+
+    // Delete
+    void delete(int articleId);
 }
