@@ -1,6 +1,8 @@
 package com.javabom.minilog.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "members")
@@ -14,6 +16,10 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int mno;
+
+    @OneToMany(mappedBy = "members")
+    @JoinColumn(name = "author")
+    private List<Article> articles = new ArrayList<Article>();
 
     public Member() {}
 
