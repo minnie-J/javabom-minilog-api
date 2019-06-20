@@ -11,7 +11,7 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment DB에 위임
 //    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ano")
-    private int articleId;
+    private int id;
 
     private String title;
     private String content;
@@ -37,8 +37,8 @@ public class Article {
 
     public Article() {}
 
-    public Article(int articleId, String title, String content, String symbol, Date regdate, String category, String subclass, double stars, String reldate, String relplace, String relperson, String tags, int author) {
-        this.articleId = articleId;
+    public Article(int id, String title, String content, String symbol, Date regdate, String category, String subclass, double stars, String reldate, String relplace, String relperson, String tags, int author) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.symbol = symbol;
@@ -53,12 +53,12 @@ public class Article {
         this.author = author;
     }
 
-    public int getArticleId() {
-        return articleId;
+    public int getId() {
+        return id;
     }
 
-//    public void setAno(int articleId) {
-//        this.articleId = articleId;
+//    public void setAno(int id) {
+//        this.id = id;
 //    }
 
     public String getTitle() {
