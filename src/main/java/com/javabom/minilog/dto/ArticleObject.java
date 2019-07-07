@@ -1,8 +1,5 @@
 package com.javabom.minilog.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,13 +7,7 @@ public class ArticleObject {
     private String type;
     private String id;
     private Attributes attributes;
-//    @JsonProperty("links")
     private Map<String, String> links;
-
-//    @JsonProperty("links")
-//    private void links(Map<String, String> links) {
-//        this.self = links.get("self");
-//    }
 
     public ArticleObject() {
     }
@@ -45,6 +36,7 @@ public class ArticleObject {
 
     public void setId(String id) {
         this.id = id;
+        setLinks(id);
     }
 
     public Attributes getAttributes() {
