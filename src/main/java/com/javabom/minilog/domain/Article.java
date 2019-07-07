@@ -1,14 +1,14 @@
 package com.javabom.minilog.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.javabom.minilog.dto.Attributes;
-import org.springframework.hateoas.ResourceSupport;
+//import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity // (=Model)
-@Table(name="articles") // table name
+@Table(name = "articles") // table name
 //public class Article extends ResourceSupport {
 public class Article {
 
@@ -40,7 +40,7 @@ public class Article {
 
     private String symbol;
 
-//    @Temporal(TemporalType.TIMESTAMP)
+    //    @Temporal(TemporalType.TIMESTAMP)
 //    private Date regdate;
     private LocalDateTime regdate;
 
@@ -76,14 +76,16 @@ public class Article {
 //        this.self = (String) links.get("self");
 //    }
 
-    public Article() {}
-
-    public Article(Attributes attributes) {
-        this.title = attributes.getTitle();
-        this.content = attributes.getContent();
-        this.regdate = attributes.getRegdate();
+    public Article() {
     }
 
+    //
+//    public Article(Attributes attributes) {
+//        this.title = attributes.getTitle();
+//        this.content = attributes.getContent();
+//        this.regdate = attributes.getRegdate();
+//    }
+//
     public Article(int id, String title, String content, String symbol, LocalDateTime regdate, String category, String subclass, double stars, String reldate, String relplace, String relperson, String tags, int author) {
         this.id = id;
         this.title = title;
@@ -219,17 +221,21 @@ public class Article {
         this.author = author;
     }
 
-//    public Attributes getAttributes() {
+    //    public Attributes getAttributes() {
 //        attributes.setContent(this.content);
 //        attributes.setTitle(this.title);
 //        attributes.setRegdate(this.regdate);
 //        return attributes;
 //    }
 //
-//    public void setAttributes(Attributes attributes) {
-//        this.attributes = attributes;
-//        this.title = attributes.getTitle();
-//        this.content = attributes.getContent();
-//        this.regdate = attributes.getRegdate();
-//    }
+    public void updateArticle(Attributes attributes) {
+        if (attributes.getTitle() != null) {
+            this.title = attributes.getTitle();
+        }
+
+        if (attributes.getContent() != null) {
+            this.content = attributes.getContent();
+        }
+        this.regdate = LocalDateTime.now();
+    }
 }
