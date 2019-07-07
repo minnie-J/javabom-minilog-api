@@ -1,9 +1,8 @@
 package com.javabom.minilog.dto;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import com.javabom.minilog.domain.Article;
+
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Attributes {
 
@@ -14,12 +13,28 @@ public class Attributes {
 
     public Attributes() {}
 
-    public Attributes(String title, String content, LocalDateTime regdate) {
-        this.title = title;
-        this.content = content;
-        this.regdate = regdate;
+    public Attributes fromArticle(Article article) {
+        Attributes attributes = new Attributes();
+        attributes.setTitle(article.getTitle());
+        attributes.setContent(article.getContent());
+        attributes.setRegdate(article.getRegdate());
+
+        return attributes;
     }
 
+    public void toArticle(Attributes attributes) {
+        Article article = new Article();
+        article.setTitle(attributes.getTitle());
+        article.setContent(attributes.getContent());
+        article.setRegdate(LocalDateTime.now());
+    }
+
+//    public Attributes(String title, String content, LocalDateTime regdate) {
+//        this.title = title;
+//        this.content = content;
+//        this.regdate = regdate;
+//    }
+//
     public String getTitle() {
         return title;
     }
