@@ -1,53 +1,54 @@
 package com.javabom.minilog.controller;
 
-import com.javabom.minilog.domain.Article;
-import com.javabom.minilog.domain.JSONResponse;
-import com.javabom.minilog.domain.ResponseWrapper;
+import com.javabom.minilog.dto.ArticleData;
+import com.javabom.minilog.dto.ArticleObject;
 import com.javabom.minilog.service.ArticleService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
-
 @RestController
+@RequestMapping("/api/v1/articles")
 public class ArticleController {
+    Logger logger = LoggerFactory.getLogger("com.javabom.minilog.MiniLogApplication");
 
     @Autowired
     ArticleService articleService;
 
-    @GetMapping(value = "/api/v1/articles")
-    // @GetMapping ==> @RequestMapping(method = RequestMethod.GET)의 축약
-    public ResponseEntity<ResponseWrapper> getAllArticles() {
-        List<Article> articles = articleService.findAll();
+    @GetMapping(value = "/")
+    public ResponseEntity<ArticleData> getAllArticles() {
+        ArticleData articleData = articleService.findAll();
 
-        List<JSONResponse> jsonResponses = new ArrayList<JSONResponse>();
-        for (Article article : articles) {
-            JSONResponse jsonResponse = new JSONResponse();
-            Map<Object, Object> attribute = new HashMap<Object, Object>();
-            Map<Object, Object> links = new HashMap<Object, Object>();
-            jsonResponse.setType("articles");
-                jsonResponse.setId(article.getId());
-                attribute.put("title", article.getTitle());
-                attribute.put("content", article.getContent());
-                jsonResponse.setAttributes(attribute);
-                links.put("self", "/api/vi/article/" + article.getId());
-                jsonResponse.setLinks(links);
-
-                jsonResponses.add(jsonResponse);
-            }
-
-        ResponseWrapper responseWrapper = new ResponseWrapper(jsonResponses);
-        ResponseEntity<ResponseWrapper> articlesEntity = new ResponseEntity<ResponseWrapper>(responseWrapper, HttpStatus.OK);
-        return articlesEntity;
+        return ResponseEntity.ok().body(articleData);
     }
 
-    @PostMapping(value = "/api/v1/articles")
-    public ResponseEntity<Article> save(Article article) {
-        Article newArticle = articleService.create(article);
-        ResponseEntity<Article> articleEntity = new ResponseEntity<Article>(newArticle, HttpStatus.OK);
-        return articleEntity;
+    @GetMapping(value = "/{articleId}")
+    public ResponseEntity<ArticleData> getAricle(@PathVariable(value = "articleId") int articleId) {
+        ArticleData articleData = articleService.findById(articleId);
+
+        return ResponseEntity.ok().body(articleData);
+    }
+
+    @PostMapping(value = "/")
+    public ResponseEntity<ArticleData> save(@RequestBody ArticleData<ArticleObject> articleData) {
+
+        ArticleData entity = articleService.create(articleData.getData());
+
+//        return new ResponseEntity<ArticleData>(entity, HttpStatus.CREATED);
+        return ResponseEntity.status(201).body(entity);
+    }
+
+    @PutMapping(value = "/{articleId}")
+    public ResponseEntity<ArticleData> update(@PathVariable(value = "articleId") int articleId, @RequestBody ArticleData<ArticleObject> changeAttributes) {
+
+        return ResponseEntity.ok().body(articleService.update(articleId, changeAttributes));
+    }
+
+    @DeleteMapping(value = "/{articleId}")
+    public void delete(@PathVariable(value = "articleId") int articleId) {
+        articleService.delete(articleId);
     }
 
 }

@@ -1,11 +1,11 @@
 package com.javabom.minilog.dto;
 
-public class ArticleDTO<Wrapper> {
+public class ArticleData<Wrapper> {
     private Wrapper data;
 
-    public ArticleDTO(){}
+    public ArticleData(){}
 
-    public ArticleDTO(Wrapper data) {
+    public ArticleData(Wrapper data) {
         this.data = data;
     }
 

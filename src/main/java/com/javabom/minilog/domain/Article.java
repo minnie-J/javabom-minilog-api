@@ -1,11 +1,20 @@
 package com.javabom.minilog.domain;
 
+//import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.javabom.minilog.dto.Attributes;
+//import org.springframework.hateoas.ResourceSupport;
+
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity // (=Model)
-@Table(name="articles") // table name
+@Table(name = "articles") // table name
+//public class Article extends ResourceSupport {
 public class Article {
+
+//    @Transient
+//    @JsonProperty("type")
+//    private String type;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment DB에 위임
@@ -15,10 +24,25 @@ public class Article {
 
     private String title;
     private String content;
+
+//    @Transient
+//    @JsonProperty("attributes")
+//    private Attributes attributes;
+
+//    @Transient
+//    @JsonProperty("attributes")
+
+//    private Map<String, Object> attributes;
+//    @Transient
+//    @JsonProperty("self")
+
+//    private String self;
+
     private String symbol;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date regdate;
+    //    @Temporal(TemporalType.TIMESTAMP)
+//    private Date regdate;
+    private LocalDateTime regdate;
 
     @Column(name = "class")
     private String category;
@@ -33,11 +57,36 @@ public class Article {
 
 //    @ManyToOne
 //    @JoinColumn(name = "mno")
+
 //    private Member member;
 
-    public Article() {}
 
-    public Article(int id, String title, String content, String symbol, Date regdate, String category, String subclass, double stars, String reldate, String relplace, String relperson, String tags, int author) {
+//    public void setSelf(String self) {
+//        this.self = self;
+
+//    }
+
+//    @JsonProperty("attributes")
+//    public void setAttribute(Map<String, Object> attributes) {
+//        this.title = (String) attributes.get("title");
+//        this.content = (String) attributes.get("content");
+//    }
+//    @JsonProperty("links")
+//    private void setLink(Map<String, Object> links) {
+//        this.self = (String) links.get("self");
+//    }
+
+    public Article() {
+    }
+
+    //
+//    public Article(Attributes attributes) {
+//        this.title = attributes.getTitle();
+//        this.content = attributes.getContent();
+//        this.regdate = attributes.getRegdate();
+//    }
+//
+    public Article(int id, String title, String content, String symbol, LocalDateTime regdate, String category, String subclass, double stars, String reldate, String relplace, String relperson, String tags, int author) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -53,12 +102,27 @@ public class Article {
         this.author = author;
     }
 
+//    public Article(String type, int id, Attribute attributes) {
+//        this.type = type;
+//        this.id = id;
+//        this.attributes = attributes;
+//    }
+
+//    public void setType(String type) {
+//        this.type = type;
+//    }
+
     public int getId() {
         return id;
     }
-
 //    public void setAno(int id) {
 //        this.id = id;
+//    }
+
+//    public Attribute getAttributes() {return attributes;}
+//
+//    public void setAttributes(Attribute attributes) {
+//        this.attributes = attributes;
 //    }
 
     public String getTitle() {
@@ -85,11 +149,11 @@ public class Article {
         this.symbol = symbol;
     }
 
-    public Date getRegdate() {
+    public LocalDateTime getRegdate() {
         return regdate;
     }
 
-    public void setRegdate(Date regdate) {
+    public void setRegdate(LocalDateTime regdate) {
         this.regdate = regdate;
     }
 
@@ -155,5 +219,23 @@ public class Article {
 
     public void setAuthor(int author) {
         this.author = author;
+    }
+
+    //    public Attributes getAttributes() {
+//        attributes.setContent(this.content);
+//        attributes.setTitle(this.title);
+//        attributes.setRegdate(this.regdate);
+//        return attributes;
+//    }
+//
+    public void updateArticle(Attributes attributes) {
+        if (attributes.getTitle() != null) {
+            this.title = attributes.getTitle();
+        }
+
+        if (attributes.getContent() != null) {
+            this.content = attributes.getContent();
+        }
+        this.regdate = LocalDateTime.now();
     }
 }
